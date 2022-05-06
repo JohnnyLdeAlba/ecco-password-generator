@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>     
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.8 user-scalable=no" />
+
+<title>Ecco Password Generator</title>
+<meta name="description" content="The Ecco Password Generator is a tool used for generating and decoding passwords from the Ecco the Dolphin series." />
+
+<link rel="shortcut icon" type="image/png" href="/icon.png" />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Ecco the Dolphin Online">
+<meta property="og:title" content="Ecco Password Generator">
+<meta property="og:description" content="The Ecco Password Generator is a tool used for generating and decoding passwords from the Ecco the Dolphin series.">
+<meta property="og:image" content="https://eccothedolphin.online/ecco-password-generator/card.png">
+<meta property="og:url" content="https://eccothedolphin.online/ecco-password-generator">
+<meta property="twitter:card" content="summary_large_image">
+
+<link href="lib/style-2.css?v=1113202109" rel="stylesheet" type="text/css" />
+
+<script src="lib/user-interface.js?v=1113202109"></script>
+<script src="lib/web-sprite.js?v=1113202109"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="container_caption">
+
+        <a href="">         
+        <img src="resources/logo-glyph.svg" class="logo" alt="Ecco the Dolphin Online" /></a>
+
+
+    </div>
+
+<div class="container_body">
+<style>
+
+#display { display: block; margin: 0px auto 0px auto; width: 640px; height: 480px; image-rendering: pixelated; }
+#footer { display: none; }
+
+.uppercase { text-transform: uppercase; }
+
+.textin
+{
+    font-size: 12pt;
+    letter-spacing: 0.75pt;
+
+    background-color: #001142;
+    border: 1px solid #003382;
+    border-radius: 4px;
+    color: #bbbbcc;
+    overflow: auto;
+    padding: 4px 8px;
+    user-select: none;
+
+    width: 120px;
+}
+
+.preformatted { white-space: pre; }
+
+@media only screen and (min-width: 320px)
+{
+    #display
+    {
+        margin: 20px auto 20px auto;
+        height: 240px;
+        image-rendering: pixelated;
+        width: 320px;
+    }
+}
+
+@media only screen and (min-width: 640px)
+{
+    #display
+    {
+        display: block;
+        margin: 20px auto 20px auto;
+        width: 640px;
+        height: 480px;
+        image-rendering: pixelated;
+    }
+}
+
+</style>
+
+<p><canvas width='320' height='240' id='display'></canvas></p>
+
+<div id="panel_game" class="dialog invisible">
+<div class="dialog_caption">Game</div>
+        <div class='menu'>
+            <div id="menu_ecco_game_01" class="menu3_item">Keep current settings...</div> 
+            <div id="menu_ecco_game_02" class="menu3_item">About the Ecco Password Generator</div> 
+            <div id="menu_ecco_game_03" class="menu3_item">Ecco the Dolphin for Mega Drive/Genesis</div> 
+            <div id="menu_ecco_game_04" class="menu3_item"> &boxur; Ecco the Dolphin for the Nintendo Switch</div> 
+            <div id="menu_ecco_game_05" class="menu3_item">Ecco the Dolphin Japanese Version for Mega Drive</div> 
+            <div id="menu_ecco_game_06" class="menu3_item">Ecco the Dolphin Revision 1 Prototype Sega Genesis</div> 
+            <div id="menu_ecco_game_07" class="menu3_item">Ecco the Dolphin for Sega CD</div> 
+            <div class="menu_category">More Password Generators</div> 
+            <a href="../ecco2-password-generator" class="menu3_item">Ecco 2: The Tides of Time</a> 
+        </div>
+</div>
+
+<div id="panel_about" class="invisible">
+<div class="dialog">
+<div class="dialog_caption">About the Ecco Password Generator</div>
+<div class="dialog_body_solid">
+
+    <h3 class="align_c">Ecco Password Generator, Beta Version 0.99.111321</h3>
+    <p class="align_c bold">Created by Johnny L. de Alba (The Collector)</p>
+
+    <h3>What is the Ecco Password Generator?</h3>
+    <p>
+        The Ecco Password Generator is a tool used for generating and decoding passwords from the Ecco the Dolphin series. 
+        The password generator can do things the games built in debug mode cannot do. One such feature is being able to enable
+        unlimited air, or charge sonar and permanent kill abilities. You can even select the globe you return to the Asterite on
+        the second Deep Water stage!
+    </p>
+
+    <h3>Which Ecco the Dolphin games does it currently support?</h3>
+
+    <p>&bullet; Ecco the Dolphin for Mega Drive/Genesis</p>
+    <p>&nbsp; &boxur; Ecco the Dolphin for the Nintendo Switch</p>
+    <p>&bullet; Ecco the Dolphin Japanese Version for Mega Drive</p>
+    <p>&bullet; Ecco the Dolphin Revision 1 Prototype for Sega Genesis</p>
+    <p>&bullet; Ecco the Dolphin for Sega CD</p>
+    <p>&bullet; Ecco 2: The Tides of Time for Mega Drive/Genesis/Sega CD: Decoder Only</p>
+
+    <h3>What are Scenarios?</h3>
+    <p>
+        Scenarios are exclusive to Ecco the Dolphin for Mega Drive/Sega Genesis. They generate passwords so the player can experience things
+        in the game they might not otherwise be able to experience. In addition some of the scenarios signify major events that occur in the game
+        that the player can participate in. 
+    </p>
+
+    <h3>What is a Stage Event?</h3>
+    <p>
+        A Stage Event controls an aspect of a particular stage. There are four in total, two of which determine the behavior of the
+        time machine, while another determines the effects of the storm at the begining of the game. A final stage event is included
+        due to a bug in the password system, this one is labeled Stage Event 6.
+    </p>
+
+    <h3>What are Special Abilities?</h3>
+    <p>
+        Special Abilities are aspects of Ecco that allow him an advantage during game play.
+        Unlimited Air is an ability granted to Ecco after returning the Asterite's missing globe. It enables him to not have to surface for air.
+        Charge Sonar is an ability Ecco receives from saving the dolphins on the stage The Vents. When the player presses both the charge and sonar buttons at the same time,
+        Ecco can create a pulse sonar that can kill enemies at a distance. The Permenent Kill ability is given to Ecco for saving the dolphins on the stage The Lagoon. After
+        the player kills an enemy if they quickly tap the charge button, the enemy will be absorbed into Ecco's memory and will be unable to respawn.
+    </p>
+
+    <h3>What is the Death Counter?</h3>
+    <p>
+        The Death Counter is an unused part the of password system that keeps track of the amount of times Ecco died in the game.
+        It has a resolution of 7, meaning it will count the amount of times Ecco died and eventually stop at 7.
+    </p>
+
+    <h3>What is Time Elapsed?</h3>
+    <p>
+        Time elapsed is a built in timer that keeps track of the total amount of time the player has been playing the game.
+    </p>
+ 
+
+    <h3>What is the meaning of all the spheres?</h3>
+    <div class="padded">
+        <div class="overflow">
+            <img src="resources/globes/globe-jur-small.png" class="float_l" alt="time machine sends ecco to jurassic beach" /> 
+            &nbsp; Time Machine sends Ecco to Jurassic Beach
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-hom-small.png" class="float_l" alt="time machine sends ecco to home bay" />
+            &nbsp; Time Machine sends Ecco to Home Bay
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-vor-small.png" class="float_l" alt="The Storm sends Ecco to The Tube" />
+            &nbsp; The Storm sends Ecco to the Tube
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-air-small.png" class="float_l" alt="unlimited air enabled" />
+            &nbsp; Unlimited Air enabled
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-glo-small.png" class="float_l" alt="asterite globe obtained" />
+            &nbsp; Asterite Globe obtained
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-cha-small.png" class="float_l" alt="charge sonar enabled" />
+            &nbsp; Charge Sonar enabled
+        </div>
+        <div class="overflow">
+            <img src="resources/globes/globe-kil-small.png" class="float_l" alt="permenent kill enabled" />
+            &nbsp; Permanent Kill enabled
+        </div>
+    </div>
+</div>
+</div>
+
+    <div class="dialog">
+    <div class="dialog_caption">Debugger</div>
+    <div class="menu">
+    <div class="menu_item_static">
+        <img id="ecco_switch_debug_mode_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+        <img id="ecco_switch_debug_mode_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+        Enable Debug Mode
+    </div>
+    </div>
+    </div>
+
+    <div class="align_r">
+        <div id="control_about_ok" class="control3">OK</div>
+    </div>
+</div>
+
+<div id="panel_ecco1md_goat" class="invisible">
+
+<div class="dialog xsmall">
+<div class="dialog_caption">Goat Passwords - Color Legend</div>
+<div class="dialog_body_solid bold">
+
+    <span class="red">
+        <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+        Unstable Password.
+    </span><br /><br />
+
+    This password is considered unsafe and uses invalid settings.<br />
+    Game cannot be completed with this password.<br /><br />
+
+    <span class="yellow">
+        <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+        Invalid Password.
+    </span><br /><br />
+
+    Use caution when using this password, it uses invalid settings.<br />
+    Game can still be completed with this password.
+    <br /><br />
+
+    <span class="green">
+        <img src="resources/circle-green.svg" class="icon_small" alt=""/>
+        Valid Password.
+    </span><br /><br />
+
+    This password is considered safe and uses valid settings.
+
+</div>
+</div>
+ 
+<div class="dialog">
+<div class="dialog_caption">Greatest of All Time Passwords</div>
+    <div class='menu'>
+        <div id="menu_ecco1md_goat_01" class="menu3_item">Keep current settings...</div> 
+
+        <div class="menu_category">Word Passwords</div>
+        <div id="menu_ecco1md_goat_02" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            ALNELSIN <div class="float_r">The Last Fight</div>
+        </div> 
+        <div id="menu_ecco1md_goat_03" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            FIVEPODS<div class="float_r">The Tube</div>
+        </div> 
+        <div id="menu_ecco1md_goat_04" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            LIFEFISH<div class="float_r">Begin the Game with Infinite Air</div>
+        </div> 
+        <div id="menu_ecco1md_goat_05" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            SHARKFIN<div class="float_r">The Lagoon</div>
+        </div> 
+ 
+        <div class="menu_category">PLEASE.. Passwords</div>
+        <div id="menu_ecco1md_goat_p01" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEEE <div class="float_r">Ice Zone</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p02" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEFF <div class="float_r">Island Zone</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p03" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEGG <div class="float_r">Pteranadon Pond</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p04" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEHH <div class="float_r">City of Forever</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p05" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEII <div class="float_r">Undercaves</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p06" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEKK <div class="float_r">Deep City</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p07" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            PLEASEOO<div class="float_r">The Last Fight</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p08" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEPP<div class="float_r">Island Zone</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p09" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEQQ <div class="float_r">Origin Beach</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p10" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASERR<div class="float_r">Cold Water</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p11" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASESS<div class="float_r">Undercaves</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p12" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEUU <div class="float_r">Marble Sea</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p13" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEWW <div class="float_r">Open Ocean</div>
+        </div> 
+        <div id="menu_ecco1md_goat_p14" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            PLEASEZZ <div class="float_r">Ridge Water</div>
+        </div>
+ 
+        <div class="menu_category">Repetitive Letter Passwords</div>
+        <div id="menu_ecco1md_goat_r01" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            AAAAAAAA <div class="float_r">Undercaves</div>
+        </div> 
+        <div id="menu_ecco1md_goat_r02" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            NNNNNNNN <div class="float_r">Welcome to the Machine</div>
+        </div> 
+ 
+        <div class="menu_category">Two Letter Passwords</div>
+        <div id="menu_ecco1md_goat_201" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . AA <div class="float_r">The Storm Sends Ecco to the Tube</div>
+        </div> 
+        <div id="menu_ecco1md_goat_202" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . BB <div class="float_r">Dark Water</div>
+        </div> 
+        <div id="menu_ecco1md_goat_203" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . CC <div class="float_r">Ice Zone</div>
+        </div> 
+        <div id="menu_ecco1md_goat_204" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . EE <div class="float_r">Pteranadon Pond</div>
+        </div> 
+        <div id="menu_ecco1md_goat_205" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . FF <div class="float_r">City of Forever</div>
+        </div> 
+        <div id="menu_ecco1md_goat_206" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . GG <div class="float_r">Undercaves</div>
+        </div> 
+        <div id="menu_ecco1md_goat_207" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . II <div class="float_r">Deep City</div>
+        </div> 
+        <div id="menu_ecco1md_goat_208" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . KK <div class="float_r">Open Ocean</div>
+        </div> 
+        <div id="menu_ecco1md_goat_209" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            . . . . . . LL <div class="float_r">Welcome to the Machine</div>
+        </div> 
+        <div id="menu_ecco1md_goat_210" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            . . . . . . MM <div class="float_r">The Last Fight</div>
+        </div> 
+        <div id="menu_ecco1md_goat_211" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . OO <div class="float_r">Origin Beach</div>
+        </div> 
+        <div id="menu_ecco1md_goat_212" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . PP <div class="float_r">Cold Water</div>
+        </div> 
+        <div id="menu_ecco1md_goat_213" class="menu3_item smalli">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . QQ <div class="float_r">The Vents</div>
+        </div> 
+        <div id="menu_ecco1md_goat_214" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . SS <div class="float_r">The Marble Sea</div>
+        </div> 
+        <div id="menu_ecco1md_goat_215" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . UU <div class="float_r">Open Ocean</div>
+        </div> 
+        <div id="menu_ecco1md_goat_216" class="menu3_item small">
+            <img src="resources/circle-yellow.svg" class="icon_small" alt=""/>
+            . . . . . . VV <div class="float_r">The Tube</div>
+        </div> 
+        <div id="menu_ecco1md_goat_217" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . YY <div class="float_r">Trilobite Circle</div>
+        </div> 
+        <div id="menu_ecco1md_goat_218" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . ZZ <div class="float_r">Hard Water</div>
+        </div> 
+
+        <div class="menu_category">Shortest Password</div>
+        <div id="menu_ecco1md_goat_r99" class="menu3_item small">
+            <img src="resources/circle-red.svg" class="icon_small" alt=""/>
+            . . . . . . . A <div class="float_r">The Vents</div>
+        </div> 
+
+    </div>
+</div>
+</div>
+
+<div id="panel_ecco1_stage" class="dialog invisible">
+<div class="dialog_caption">Stage</div>
+    <div class='menu'>
+        <div id="menu_ecco1md_stage_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1md_stage_02" class="menu3_item">Selection Screen</div> 
+        <div id="menu_ecco1md_stage_03" class="menu3_item">Undercaves</div> 
+        <div id="menu_ecco1md_stage_04" class="menu3_item">The Vents</div> 
+        <div id="menu_ecco1md_stage_05" class="menu3_item">The Lagoon</div> 
+        <div id="menu_ecco1md_stage_06" class="menu3_item">Ridge Water</div> 
+        <div id="menu_ecco1md_stage_07" class="menu3_item">Open Ocean to Ice Zone</div> 
+        <div id="menu_ecco1md_stage_08" class="menu3_item">Ice Zone</div> 
+        <div id="menu_ecco1md_stage_09" class="menu3_item">Hard Water</div> 
+        <div id="menu_ecco1md_stage_10" class="menu3_item">Cold Water</div> 
+        <div id="menu_ecco1md_stage_11" class="menu3_item">Island Zone</div> 
+        <div id="menu_ecco1md_stage_12" class="menu3_item">Deep Water</div> 
+        <div id="menu_ecco1md_stage_13" class="menu3_item">The Marble Sea</div> 
+        <div id="menu_ecco1md_stage_14" class="menu3_item">The Library</div> 
+        <div id="menu_ecco1md_stage_15" class="menu3_item">Deep City</div> 
+        <div id="menu_ecco1md_stage_16" class="menu3_item">City of Forever to Jurassic Beach</div> 
+        <div id="menu_ecco1md_stage_17" class="menu3_item">Jurassic Beach</div> 
+        <div id="menu_ecco1md_stage_18" class="menu3_item">Pteranodon Pond</div> 
+        <div id="menu_ecco1md_stage_19" class="menu3_item">Origin Beach</div> 
+        <div id="menu_ecco1md_stage_20" class="menu3_item">Trilobite Circle</div> 
+        <div id="menu_ecco1md_stage_21" class="menu3_item">Dark Water</div> 
+        <div id="menu_ecco1md_stage_22" class="menu3_item">Deep Water from Dark Water</div> 
+        <div id="menu_ecco1md_stage_23" class="menu3_item">City of Forever to Home Bay</div> 
+        <div id="menu_ecco1md_stage_24" class="menu3_item">The Tube</div> 
+        <div id="menu_ecco1md_stage_25" class="menu3_item">Welcome to the Machine</div> 
+        <div id="menu_ecco1md_stage_26" class="menu3_item">The Last Fight</div> 
+    </div>
+</div>
+
+<div id="panel_ecco1jpmd_stage" class="dialog invisible">
+<div class="dialog_caption">Stage</div>
+    <div class='menu'>
+        <div id="menu_ecco1jpmd_stage_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1jpmd_stage_02" class="menu3_item">Selection Screen</div> 
+        <div id="menu_ecco1jpmd_stage_03" class="menu3_item">Undercaves</div> 
+        <div id="menu_ecco1jpmd_stage_04" class="menu3_item">The Vents</div> 
+        <div id="menu_ecco1jpmd_stage_05" class="menu3_item">The Lagoon</div> 
+        <div id="menu_ecco1jpmd_stage_06" class="menu3_item">Ridge Water</div> 
+        <div id="menu_ecco1jpmd_stage_07" class="menu3_item">Open Ocean to Ice Zone</div> 
+        <div id="menu_ecco1jpmd_stage_08" class="menu3_item">Ice Zone</div> 
+        <div id="menu_ecco1jpmd_stage_09" class="menu3_item">Hard Water</div> 
+        <div id="menu_ecco1jpmd_stage_10" class="menu3_item">Cold Water</div> 
+        <div id="menu_ecco1jpmd_stage_11" class="menu3_item">Open Ocean to Island Zone</div> 
+        <div id="menu_ecco1jpmd_stage_12" class="menu3_item">Island Zone</div> 
+        <div id="menu_ecco1jpmd_stage_13" class="menu3_item">Deep Water</div> 
+        <div id="menu_ecco1jpmd_stage_14" class="menu3_item">The Marble Sea</div> 
+        <div id="menu_ecco1jpmd_stage_15" class="menu3_item">The Library</div> 
+        <div id="menu_ecco1jpmd_stage_16" class="menu3_item">Deep City</div> 
+        <div id="menu_ecco1jpmd_stage_17" class="menu3_item">City of Forever to Jurassic Beach</div> 
+        <div id="menu_ecco1jpmd_stage_18" class="menu3_item">Jurassic Beach</div> 
+        <div id="menu_ecco1jpmd_stage_19" class="menu3_item">Pteranodon Pond</div> 
+        <div id="menu_ecco1jpmd_stage_20" class="menu3_item">Origin Beach</div> 
+        <div id="menu_ecco1jpmd_stage_21" class="menu3_item">Trilobite Circle</div> 
+        <div id="menu_ecco1jpmd_stage_22" class="menu3_item">Dark Water</div> 
+        <div id="menu_ecco1jpmd_stage_23" class="menu3_item">Deep Water from Dark Water</div> 
+        <div id="menu_ecco1jpmd_stage_24" class="menu3_item">City of Forever to Home Bay</div> 
+        <div id="menu_ecco1jpmd_stage_25" class="menu3_item">The Tube</div> 
+        <div id="menu_ecco1jpmd_stage_26" class="menu3_item">Welcome to the Machine</div> 
+        <div id="menu_ecco1jpmd_stage_27" class="menu3_item">The Stomach</div> 
+        <div id="menu_ecco1jpmd_stage_28" class="menu3_item">The Last Fight</div> 
+    </div>
+</div>
+
+<div id="panel_ecco1cd_stage" class="dialog invisible">
+<div class="dialog_caption">Stage</div>
+    <div class='menu'>
+        <div id="menu_ecco1cd_stage_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1cd_stage_02" class="menu3_item">Undercaves</div> 
+        <div id="menu_ecco1cd_stage_03" class="menu3_item">The Vents</div> 
+        <div id="menu_ecco1cd_stage_04" class="menu3_item">The Lagoon</div> 
+        <div id="menu_ecco1cd_stage_05" class="menu3_item">Ridge Water</div> 
+        <div id="menu_ecco1cd_stage_06" class="menu3_item">Open Ocean to Ice Zone</div> 
+        <div id="menu_ecco1cd_stage_07" class="menu3_item">Ice Zone</div> 
+        <div id="menu_ecco1cd_stage_08" class="menu3_item">Hard Water</div> 
+        <div id="menu_ecco1cd_stage_09" class="menu3_item">Cold Water</div> 
+        <div id="menu_ecco1cd_stage_10" class="menu3_item">Island Zone</div> 
+        <div id="menu_ecco1cd_stage_11" class="menu3_item">Deep Water</div> 
+        <div id="menu_ecco1cd_stage_12" class="menu3_item">Deep Gate</div> 
+        <div id="menu_ecco1cd_stage_13" class="menu3_item">Ship Grave Sea</div> 
+        <div id="menu_ecco1cd_stage_14" class="menu3_item">Wreck Trap</div> 
+        <div id="menu_ecco1cd_stage_15" class="menu3_item">Sea of Silence</div> 
+        <div id="menu_ecco1cd_stage_16" class="menu3_item">Volcanic Reef</div> 
+        <div id="menu_ecco1cd_stage_17" class="menu3_item">The Marble Sea</div> 
+        <div id="menu_ecco1cd_stage_18" class="menu3_item">The Library</div> 
+        <div id="menu_ecco1cd_stage_19" class="menu3_item">Deep City</div> 
+        <div id="menu_ecco1cd_stage_20" class="menu3_item">City of Forever to Jurassic Beach</div> 
+        <div id="menu_ecco1cd_stage_21" class="menu3_item">Jurassic Beach</div> 
+        <div id="menu_ecco1cd_stage_22" class="menu3_item">Pteranodon Pond</div> 
+        <div id="menu_ecco1cd_stage_23" class="menu3_item">Origin Beach</div> 
+        <div id="menu_ecco1cd_stage_24" class="menu3_item">Trilobite Circle</div> 
+        <div id="menu_ecco1cd_stage_25" class="menu3_item">Dark Water</div> 
+        <div id="menu_ecco1cd_stage_26" class="menu3_item">Deep Water from Dark Water</div> 
+        <div id="menu_ecco1cd_stage_27" class="menu3_item">City of Forever to Home Bay</div> 
+        <div id="menu_ecco1cd_stage_28" class="menu3_item">The Tube</div> 
+        <div id="menu_ecco1cd_stage_29" class="menu3_item">Welcome to the Machine</div> 
+        <div id="menu_ecco1cd_stage_30" class="menu3_item">The Last Fight</div> 
+    </div>
+</div>
+
+<div id="panel_ecco1_stage_event" class="dialog invisible">
+<div class="dialog_caption">Stage Event</div>
+    <div class='menu'>
+        <div id="menu_ecco1_stage_event_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1_stage_event_02" class="menu3_item">Time Machine sends Ecco to Jurassic Beach</div> 
+        <div id="menu_ecco1_stage_event_03" class="menu3_item">Time Machine sends Ecco to Home Bay</div> 
+        <div id="menu_ecco1_stage_event_04" class="menu3_item">The Storm sends Ecco to The Tube</div> 
+        <div id="menu_ecco1_stage_event_05" class="menu3_item">Stage Event 6 (Unused)</div> 
+    </div>
+</div>
+
+<div id="panel_ecco1_globe_obtained" class="dialog invisible">
+<div class="dialog_caption">Globe Obtained</div>
+    <div class='menu'>
+        <div id="menu_ecco1_globe_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_item_ecco1_globe_02">
+        <div id="menu_ecco1_globe_02" class="menu3_item">No Globe Obtained</div>
+        </div>
+        <div id="menu_ecco1_globe_03" class="menu3_item">
+	    <img src="resources/globes/globe-red-small.png" class="float_l" />
+            &nbsp; Red Globe
+        </div> 
+        <div id="menu_ecco1_globe_04" class="menu3_item">
+	    <img src="resources/globes/globe-brown-small.png" class="float_l" />
+            &nbsp; Brown Globe
+        </div> 
+        <div id="menu_ecco1_globe_05" class="menu3_item">
+	    <img src="resources/globes/globe-purple-small.png" class="float_l" />
+            &nbsp; Purple Globe
+        </div> 
+        <div id="menu_ecco1_globe_06" class="menu3_item">
+	    <img src="resources/globes/globe-green-small.png" class="float_l" />
+            &nbsp; Green Globe
+        </div> 
+        <div id="menu_item_ecco1_globe_07">
+        <div id="menu_ecco1_globe_07" class="menu3_item">
+	    <img src="resources/globes/globe-purple-small.png" class="float_l" />
+            &nbsp; Purple 5 Globe (Unused)
+        </div> 
+        </div>
+        <div id="menu_item_ecco1_globe_08">
+        <div id="menu_ecco1_globe_08" class="menu3_item">
+	    <img src="resources/globes/globe-purple-small.png" class="float_l" />
+            &nbsp; Purple 6 Globe (Unused)
+        </div>
+        </div> 
+        <div id="menu_item_ecco1_globe_09">
+        <div id="menu_ecco1_globe_09" class="menu3_item">
+	    <img src="resources/globes/globe-purple-small.png" class="float_l" />
+            &nbsp; Purple 7 Globe (Unused)
+        </div> 
+        </div>
+    </div>
+</div>
+
+<div id="panel_ecco1_death_counter" class="dialog invisible">
+<div class="dialog_caption">Death Counter</div>
+    <div class='menu'>
+        <div id="menu_ecco1_death_counter_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1_death_counter_02" class="menu3_item">No deaths play through!</div> 
+        <div id="menu_ecco1_death_counter_03" class="menu3_item">Died once!</div> 
+        <div id="menu_ecco1_death_counter_04" class="menu3_item">Died twice!</div> 
+        <div id="menu_ecco1_death_counter_05" class="menu3_item">Died three times!</div> 
+        <div id="menu_ecco1_death_counter_06" class="menu3_item">Died four times!</div> 
+        <div id="menu_ecco1_death_counter_07" class="menu3_item">Died five times!</div> 
+        <div id="menu_ecco1_death_counter_08" class="menu3_item">Died six times!</div> 
+        <div id="menu_ecco1_death_counter_09" class="menu3_item">Died seven or more times!</div> 
+    </div>
+</div>
+
+<!-- BEGIN: panel_ecco1_scenarios -->
+<div id="panel_ecco1_scenarios" class="invisible">
+
+<div class="dialog">
+<div class="dialog_caption">Scenarios</div>
+    <div class='menu'>
+        <div id="menu_ecco1_scenario_01" class="menu3_item">Keep current settings...</div> 
+        <div id="menu_ecco1_scenario_02" class="menu3_item">Clear selection</div> 
+    </div>
+</div>
+
+<div class="dialog">
+<div class="dialog_caption">Scenarios: Major Events</div>
+<div class="dialog_body">
+
+<div id="menu_ecco1_scenario_03" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/storm.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Home Bay just before the Storm</h3>
+            <div class="small">
+                <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small">Password validates despite behaving like an invalid password.</p>
+                <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small">Game begins at selection screen.</p>
+                <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small">Settings go into effect once the player starts a new game.</p>
+                <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small">Use this scenario to begin a new game with custom settings.</p>
+            </div>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="jurassic beach" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_04" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/asterite-firstencounter.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Ecco encounters the Asterite for the first time</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Deep Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">The Asterite is missing a globe.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="jurassic beach" />
+       <img src="resources/globes/globe-cha-small.png" alt="charge sonar" />
+       <img src="resources/globes/globe-kil-small.png" alt="permanent kill" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_05" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-jurassic.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Time Machine sends Ecco to Jurassic Beach</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at the City of Forever.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Time Machine sends Ecco to Jurassic Beach.</p>
+        </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="jurassic beach" />
+       <img src="resources/globes/globe-cha-small.png" alt="charge sonar" />
+       <img src="resources/globes/globe-kil-small.png" alt="permanent kill" />
+   </div> 
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_06" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/asterite-return-globe.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Ecco returns the Asterite's missing globe</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Deep Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Ecco has obtained the Asterite's missing globe.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-hom-small.png" alt="jurassic beach" />
+       <img src="resources/globes/globe-glo-small.png" alt="globe obtained" />
+       <img src="resources/globes/globe-cha-small.png" alt="charge sonar" />
+       <img src="resources/globes/globe-kil-small.png" alt="permanent kill" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_07" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-home.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Time Machine sends Ecco to Home Bay just before The Storm</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Deep Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">The Asterite is a globe.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-hom-small.png" alt="home bay" />
+       <img src="resources/globes/globe-air-small.png" alt="unlimited air" />
+       <img src="resources/globes/globe-cha-small.png" alt="charge sonar" />
+       <img src="resources/globes/globe-kil-small.png" alt="permanent kill" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_08" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/storm-tube.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>The Storm sends Ecco to The Tube</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Password validates despite behaving like an invalid password.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at the selection screen.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Settings go into effect once the player starts a new game.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">The storm will send Ecco to The Tube.</p>
+        </div>
+    </div>
+    </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-vor-small.png" alt="vortex" />
+       <img src="resources/globes/globe-air-small.png" alt="unlimited air" />
+       <img src="resources/globes/globe-cha-small.png" alt="charge sonar" />
+       <img src="resources/globes/globe-kil-small.png" alt="permanent kill" />
+   </div>
+</div>
+
+</div>
+</div>
+
+<div class="dialog">
+<div class="dialog_caption">Scenarios: Glitched Events</div>
+<div class="dialog_body">
+
+<div id="menu_ecco1_scenario_09" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-title.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Time Machine sends Ecco to the Title Screen</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at the City of Forever.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Time Machine sends Ecco back in time and the title screen appears.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game cannot be completed with these settings.</p>
+        </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-hom-small.png" alt="home bay" />
+   </div> 
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_10" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-outoforder.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Time Machine Out of Order</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at the City of Forever.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Time Machine will not work.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Stage cannot be completed with these settings.</p>
+        </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="jurassic beach" />
+       <img src="resources/globes/globe-glo-small.png" alt="globe obtained" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_11" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/deepwater-noexit.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Deep Water stage has no exit</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Deep Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Asterite has all of its globes.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Ecco wil be trapped on this stage.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Stage cannot be completed with these settings.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="jurassic beach" />
+       <img src="resources/globes/globe-air-small.png" alt="unlimited air" />
+   </div>
+</div>
+
+<br />
+<div id="menu_ecco1_scenario_12" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/deepwater-trapped.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Ecco gets trapped in the Asterite's Cave</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Deep Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Asterite has all of its globes.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Ecco will be trapped in the Asterite's Cave.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Stage cannot be completed with these settings.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-jur-small.png" alt="home" />
+       <img src="resources/globes/globe-glo-small.png" alt="globe obtained" />
+       <img src="resources/globes/globe-air-small.png" alt="unlimited air" />
+   </div>
+</div>
+
+
+
+<br />
+<div id="menu_ecco1_scenario_13" class="dialog_panel">
+    <div class="overflow">
+    <div class="r_width_30 r_float_l align_c">
+        <div class="exhibit">
+            <img src="resources/caption/preasterite-fight.png" alt="" />
+        </div>
+    </div>
+    <div class="r_width_70 r_float_l">
+        <div class="padded">
+            <h3>Prehistoric Asterite respawns after it is defeated</h3>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Game begins at Dark Water.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Prehistoric Asterite will respawn after it's defeated.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Ecco must leave the Asterite's area in order for it to respawn.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">The Asterite will communicate with Ecco after it is defeated.</p>
+            <img src="resources/check.svg" class="relative icon_medium" /><p class="margin_left_small small">Stage cannot be completed with these settings.</p>
+       </div>
+   </div>
+   </div>
+   <div class="align_r">
+       <img src="resources/globes/globe-hom-small.png" alt="home" />
+       <img src="resources/globes/globe-air-small.png" alt="unlimited air" />
+   </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<!-- END: panel_ecco1_scenarios -->
+
+<!-- BEGIN: panel_ecco1 -->
+<div id="panel_ecco1">
+<form>
+
+<p class="align_c">
+
+    <img id="globe_jur_disabled" class="invisible" src="resources/globes/globe-jur-disabled.png" />
+    <img id="globe_jur_enabled" class="invisible" src="resources/globes/globe-jur-enabled.png" />
+    <img id="globe_hom_disabled" class="invisible" src="resources/globes/globe-hom-disabled.png" />
+    <img id="globe_hom_enabled" class="invisible" src="resources/globes/globe-hom-enabled.png" />
+    <img id="globe_vor_disabled" class="invisible" src="resources/globes/globe-vor-disabled.png" />
+    <img id="globe_vor_enabled" class="invisible" src="resources/globes/globe-vor-enabled.png" />
+    <img id="globe_air_disabled" class="invisible" src="resources/globes/globe-air-disabled.png" />
+    <img id="globe_air_enabled" class="invisible" src="resources/globes/globe-air-enabled.png" />
+    <img id="globe_glo_disabled" class="invisible" src="resources/globes/globe-glo-disabled.png" />
+    <img id="globe_glo_red" class="invisible" src="resources/globes/globe-glo-red.png" />
+    <img id="globe_glo_brown" class="invisible" src="resources/globes/globe-glo-brown.png" />
+    <img id="globe_glo_purple" class="invisible" src="resources/globes/globe-glo-purple.png" />
+    <img id="globe_glo_green" class="invisible" src="resources/globes/globe-glo-green.png" />
+    <img id="globe_glo_purple5" class="invisible" src="resources/globes/globe-glo-purple-5.png" />
+    <img id="globe_glo_purple6" class="invisible" src="resources/globes/globe-glo-purple-6.png" />
+    <img id="globe_glo_purple7" class="invisible" src="resources/globes/globe-glo-purple-7.png" />
+    <img id="globe_cha_disabled" class="invisible" src="resources/globes/globe-cha-disabled.png" />
+    <img id="globe_cha_enabled" class="invisible" src="resources/globes/globe-cha-enabled.png" />
+    <img id="globe_kil_disabled" class="invisible" src="resources/globes/globe-kil-disabled.png" />
+    <img id="globe_kil_enabled" class="invisible" src="resources/globes/globe-kil-enabled.png" />
+
+</p>
+
+<div class="dialog">
+<div class="dialog_caption">Ecco Password Generator</div>
+<div class="dialog_body">
+
+        <div class="dialog">
+        <div class="dialog_caption">Game</div>
+
+        <div class='menu'>
+
+            <div id="ecco_control_game" class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <span id="ecco_label_game"></span>
+            </div> 
+
+        </div>
+        </div>
+
+        <div id="panel_debug_mode" class="dialog_red invisible">
+        <div class="dialog_caption_red">Debugger</div>
+
+        <div class='menu'>
+
+            <div class="menu_item_static_red small">
+                Unencrypted Data
+                <div id="ecco1_label_unencrypted_data" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Time Elapsed
+                <div id="ecco1_label_debug_time_elapsed" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Stage ID
+                <div id="ecco1_label_debug_stage_id" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Unlimited Air and Globe Obtained
+                <div id="ecco1_label_debug_air_globe" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Stage Event
+                <div id="ecco1_label_debug_stage_event" class="float_r align_r preformatted"></div>
+            </div>
+            <div class="menu_item_static_red small">
+                Special Abilities
+                <div id="ecco1_label_debug_special_abilities" class="float_r align_r preformatted"></div>
+            </div>
+             <div class="menu_item_static_red small">
+                Death Counter
+                <div id="ecco1_label_debug_death_counter" class="float_r align_r preformatted"></div>
+            </div>
+ 
+        </div>
+        </div>
+
+        <div class="dialog">
+        <div class="dialog_caption">Password Decoder</div>
+        <div class='menu'>
+            <div class="menu_item_static small">
+                Password to Decode
+                <input type="text" id="ecco1_textin_decoded_password" maxlength="8" size="8" class="textin align_r uppercase float_r" />
+            </div>
+            <div class="menu_item_static small">
+                Suggested Password
+                <div id="ecco1_label_password_suggestion" class="float_r align_r preformatted"></div>
+            </div>
+
+            <div id="block_ecco1md_goat">
+            <div id="ecco1md_control_goat" class="menu3_item small">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                GOAT Passwords
+            </div> 
+            </div>
+
+        </div>
+        <div class="dialog_caption">Advanced Options</div>
+        <div class="menu">
+            <div class="menu_item_static">
+                <img id="ecco_switch_developer_mode_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco_switch_developer_mode_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Expert Mode
+            </div>
+        </div>
+        </div>
+
+</div>
+
+<div class="dialog_category">Settings</div>
+<div class="dialog_body">
+
+    <div class="r_width_20 r_float_l align_c">
+
+        <div id="ecco1_caption_title_screen" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/title-screen.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_selection_scr" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/selection-scr.png" alt="" />
+        </div>
+        </div>
+ 
+        <div id="ecco1_caption_home_bay" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/home-bay.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_undercaves" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/undercaves.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_ice_zone" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ice-zone.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_big_blue" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/big-blue.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_deep_water" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/deep-water.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_deep_gate" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/ecco2-home-bay.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_atlantis" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/atlantis.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_the_library" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/the-library.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_city_of_forever" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/city-of-forever.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_jurassic_beach" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/jurassic-beach.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_dark_water" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/dark-water.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_the_tube" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/the-tube.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_the_machine" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/the-machine.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_the_stomach" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/the-stomach.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_the_last_fight" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/the-last-fight.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_storm" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/storm.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_asterite_first_encounter" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/asterite-firstencounter.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_time_machine_jurassic" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-jurassic.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_asterite_return_globe" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/asterite-return-globe.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_time_machine_home" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-home.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_storm_tube" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/storm-tube.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_time_machine_title" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-title.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_time_machine_outoforder" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/time-machine-outoforder.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_deepwater_noexit" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/deepwater-noexit.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_deepwater_trapped" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/deepwater-trapped.png" alt="" />
+        </div>
+        </div>
+
+        <div id="ecco1_caption_preasterite_fight" class="invisible">
+        <div class="exhibit">
+            <img src="resources/caption/preasterite-fight.png" alt="" />
+        </div>
+        </div>
+
+    </div>
+
+    <div class="r_width_80 r_float_l">
+    <div class="column16_l">
+
+        <div id="dialog_scenarios">
+        <div class="dialog">
+        <div class="dialog_caption">Scenarios</div>
+        <div class='menu'>
+            <div id="ecco1_control_scenarios" class="menu3_item small">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <span id="ecco1_label_scenario"></span>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="dialog">
+        <div class="dialog_caption">Stage</div>
+        <div class='menu'>
+            <div id="ecco1_control_stage" class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+                <span id="ecco1_label_stage"></span>
+            </div>
+        </div>
+        <div id="dialog_stage_event">
+        <div class="dialog_category">Stage Event</div>
+        <div class="menu">
+            <div id="ecco1_control_stage_event" class="menu3_item">
+                <img src='resources/angle-right.png' class="icon_xsmall float_r" />
+                <span id="ecco1_label_stage_event"></span>
+            </div> 
+
+        </div>
+        </div>
+        </div>
+
+        <div id="dialog_globe_obtained">
+        <div class="dialog">
+        <div class="dialog_caption">Asterite Globe Obtained</div>
+        <div class='menu'>
+            <div id="ecco1_control_globe_obtained" class="menu3_item">
+                <img src="resources/angle-right.png" class="icon_xsmall float_r" />
+	        <img id="ecco1_globe_red" src="resources/globes/globe-red-small.png" class="float_l invisible" />
+	        <img id="ecco1_globe_brown" src="resources/globes/globe-brown-small.png" class="float_l invisible" />
+	        <img id="ecco1_globe_purple" src="resources/globes/globe-purple-small.png" class="float_l invisible" />
+	        <img id="ecco1_globe_green" src="resources/globes/globe-green-small.png" class="float_l invisible" />
+                <span id="ecco1_label_globe_obtained"></span>
+            </div> 
+        </div>
+        </div>
+        </div>
+
+        <div id="block_ecco1_special_abilities">
+        <div class="dialog">
+        <div class="dialog_caption">Special Abilities</div>
+        <div class='menu'>
+            <div id="menu_item_unlimited_air">
+            <div class="menu_item_static">
+                <img id="ecco1_switch_air_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco1_switch_air_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Unlimited Air
+            </div>
+            </div>
+            <div id="block_ecco1_charge">
+            <div class="menu_item_static">
+                <img id="ecco1_switch_charge_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco1_switch_charge_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+                Charge Sonar
+            </div>
+            </div>
+            <div id="block_ecco1_kill">
+            <div class="menu_item_static">
+                <img id="ecco1_switch_kill_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+                <img id="ecco1_switch_kill_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+
+                Permanent Kill
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+</div>
+</div>
+</div>
+
+<div class="dialog_category">Optional</div>
+<div class="dialog_body">
+
+    <div class="dialog">
+    <div class="dialog_caption">Death Counter</div>
+    <div class='menu'>
+        <a id="ecco1_control_death_counter" class='menu3_item'>
+            <img src='resources/angle-right.png' class='icon_xsmall float_r' />
+            <span id="ecco1_label_death_counter"></span>
+        </a> 
+    </div>
+    <div class="dialog_caption">Cheat Mode</div>
+    <div class="menu">
+    <div class="menu_item_static">
+        <img id="ecco1_switch_cheat_mode_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+        <img id="ecco1_switch_cheat_mode_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+        Cheat Mode Used
+    </div>
+    </div>
+
+    <div id="ecco1_block_time_elapsed">
+    <div class="dialog_caption">Elapsed Time</div>
+    <div class='menu'>
+        <div class='menu_item_static'> 
+            Hours <input type="text" id="ecco_textin_time_elapsed_hours" maxlength="16" size="16" class="textin uppercase float_r" />
+        </div>
+         <div class='menu_item_static'> 
+            Minutes <input type="text" id="ecco_textin_time_elapsed_minutes" maxlength="16" size="16" class="textin uppercase float_r" />
+        </div>
+         <div class='menu_item_static'> 
+            Seconds <input type="text" id="ecco_textin_time_elapsed_seconds" maxlength="16" size="16" class="textin uppercase float_r" />
+        </div>
+         <div class='menu_item_static'> 
+            Total Seconds <input type="text" id="ecco_textin_time_elapsed_total_seconds" maxlength="16" size="16" class="textin uppercase float_r" />
+        </div>
+        <div class='menu_item_static'> 
+            Total Frames <input type="text" id="ecco_textin_time_elapsed" maxlength="16" size="16" class="textin uppercase float_r" />
+        </div>
+        <div class="menu_item_static">
+            <img id="ecco1_switch_50_frames_on" src="resources/switch-on.svg" class="icon_xlarge cursor_pointer float_r invisible" />
+            <img id="ecco1_switch_50_frames_off" src="resources/switch-off.svg" class="icon_xlarge cursor_pointer float_r" />
+            PAL Version (50 FPS)
+        </div>
+    </div>
+    </div>
+    </div>
+
+</div>
+</div>
+
+</form>
+</div>
+
+
+<div id="panel_keypad_numeric" class="dialog auto_margin invisible" style="width: 220px;">
+    <div class="dialog_caption">Number Keypad</div>
+<div class="dialog_body align_c">
+    <div id="control_number_00" class="control2 ctrl_width_small">1</div>
+    <div id="control_number_01" class="control2 ctrl_width_small">2</div>
+    <div id="control_number_02" class="control2 ctrl_width_small">3</div>
+    <div id="control_number_03" class="control2 ctrl_width_small">4</div>
+    <div id="control_number_04" class="control2 ctrl_width_small">5</div>
+    <div id="control_number_05" class="control2 ctrl_width_small">6</div>
+    <div id="control_number_06" class="control2 ctrl_width_small">7</div>
+    <div id="control_number_07" class="control2 ctrl_width_small">8</div>
+    <div id="control_number_08" class="control2 ctrl_width_small">9</div>
+    <div id="control_number_10" class="control2 ctrl_width_small xsmall">DEL</div>
+    <div id="control_number_09" class="control2 ctrl_width_small">0</div>
+    <div id="control_number_11" class="control2 ctrl_width_small xxsmall">ENTER</div>
+</div>
+</div>
+
+<div id="panel_keypad_alpha" class="dialog auto_margin invisible" style="width: 580px;">
+    <div class="dialog_caption">Alpha Keypad</div>
+<div class="dialog_body align_c">
+    <div id="control_alpha_00" class="control2 ctrl_width_small">A</div>
+    <div id="control_alpha_01" class="control2 ctrl_width_small">B</div>
+    <div id="control_alpha_02" class="control2 ctrl_width_small">C</div>
+    <div id="control_alpha_03" class="control2 ctrl_width_small">D</div>
+    <div id="control_alpha_04" class="control2 ctrl_width_small">E</div>
+    <div id="control_alpha_05" class="control2 ctrl_width_small">F</div>
+    <div id="control_alpha_06" class="control2 ctrl_width_small">G</div>
+    <div id="control_alpha_07" class="control2 ctrl_width_small">H</div>
+    <div id="control_alpha_08" class="control2 ctrl_width_small">I</div>
+    <div id="control_alpha_09" class="control2 ctrl_width_small">J</div>
+    <div id="control_alpha_10" class="control2 ctrl_width_small">K</div>
+    <div id="control_alpha_11" class="control2 ctrl_width_small">L</div>
+    <div id="control_alpha_12" class="control2 ctrl_width_small">M</div>
+    <div id="control_alpha_13" class="control2 ctrl_width_small">N</div>
+    <div id="control_alpha_14" class="control2 ctrl_width_small">O</div>
+    <div id="control_alpha_15" class="control2 ctrl_width_small">P</div>
+    <div id="control_alpha_16" class="control2 ctrl_width_small">Q</div>
+    <div id="control_alpha_17" class="control2 ctrl_width_small">R</div>
+    <div id="control_alpha_18" class="control2 ctrl_width_small">S</div>
+    <div id="control_alpha_19" class="control2 ctrl_width_small">T</div>
+    <div id="control_alpha_20" class="control2 ctrl_width_small">U</div>
+    <div id="control_alpha_21" class="control2 ctrl_width_small">V</div>
+    <div id="control_alpha_22" class="control2 ctrl_width_small">W</div>
+    <div id="control_alpha_23" class="control2 ctrl_width_small">X</div>
+    <div id="control_alpha_24" class="control2 ctrl_width_small">Y</div>
+    <div id="control_alpha_25" class="control2 ctrl_width_small">Z</div>
+    <div id="control_alpha_26" class="control2 ctrl_width_small xsmall">SPACE</div>
+    <div id="control_alpha_27" class="control2 ctrl_width_small xxsmall">DEL</div>
+    <div id="control_alpha_28" class="control2 ctrl_width_small xxsmall">ENTER</div>
+</div>
+</div>
+
+<script>
+
+W_SPRITE_ENABLE = -2;
+
+</script>
+
+
+<script type='text/javascript' src="progressbar-2.js?v=1113202109"></script>
+<script type='text/javascript' src="wave-generator.js?v=1113202109"></script>
+<script type='text/javascript' src="composition.js?v=1113202109"></script>
+<script type='text/javascript' src="plot.js?v=1113202109"></script>
+<script type='text/javascript' src="config.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-text-generator.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-lib.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-ui.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco2-password-ui.js?v=1113202109"></script>
+<script type='text/javascript' src="ecco-password-generator.js?v=1113202109"></script>
+
+<div id="footer" class="dialog">
+<div class="dialog_body align_c">
+
+<div class="small">
+    <a href="https://eccothedolphin.online/about">About</a> &nbsp;&nbsp;
+    <a href="https://eccothedolphin.online/join-our-community-on-discord">Join Our Community</a> &nbsp;&nbsp;
+    <a href="https://twitter.com/eccoonline">Twitter</a> &nbsp;&nbsp;
+    <a href="https://www.facebook.com/eccoonline">Facebook</a> &nbsp;&nbsp;
+    <a href="https://www.deviantart.com/ecco-online">DeviantArt</a> &nbsp;&nbsp;
+    <a href="https://discord.com/invite/ahCvaUB">Discord</a> &nbsp;&nbsp;
+</div>
+
+<br />
+<div class="xsmall">
+<p>Ecco the Dolphin and all related characters/intellectual property are © <a href="https://sega.com">Service Games (SEGA)</a>.
+<br />Ecco the Dolphin was created by <a href="https://twitter.com/edannunziatta">Ed Annunziatta</a>.</p>
+
+<p>Ecco the Dolphin Online is a fan operated site that specializes in content related to the Ecco the Dolphin franchise. We are in no way affiliated with the official sources or copyright holders.</p>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<script>
+process_web_sprites("");
+</script>
+
+</body>
+</html>

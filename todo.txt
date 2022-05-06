@@ -1,0 +1,14 @@
+9/4/21
+- Completely blank passwords need to be properly run through the validator.
+- Invalid passwords that lead to selection screen need to have the correction caption.
+- Password encoder ignores time when changes are made.
+
+Espyo - 
+[x] In the about text, some section titles start with a lowercase w.
+[x] The stage event section has the typo "paticular" in the first sentence.
+[x] The second sentence has a typo with "two oh which" and with "determines" (should be "determine").
+[x] In the list of scenarios, the final vanilla one has two periods at the "The storm will send Ecco to The Tube.." line.
+
+[x] The cursor could become the hand cursor when it is above a button. It was very hard to tell I could click on things until I accidentally tried it.
+- The globes could have tooltips explaining what they are, so users don't have to go to the about screen every time they need a reminder.
+[x] The password decoder bit was a bit confusing at first. If the first field said "password to decode" or something, it'd be more clear from the get-go other than that, great work!
