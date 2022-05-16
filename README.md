@@ -17,7 +17,7 @@ ported from the original games!
 - Has an animated password screen like those found in the games.
 - Sceanario menu provides special passwords that allow the player to experience the game in a whole different way.
 
-# [Example](https://eccothedolphin.online/ecco-password-generator/)
+# [Example](https://eccothedolphin.online/ecco-text-generator/)
 This is a live version of the repo.
 
 # Installtion
