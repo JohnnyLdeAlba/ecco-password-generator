@@ -22,4 +22,4 @@ This is a live version of the repo.
 
 # Installtion
 
-Downloading this repo is all that's required as this should just run out of the box. Once downloaded, click on `index.htm` and enjoy!
+Downloading this repo is all that's required as this should just run out of the box. Once downloaded, click on `index.html` and enjoy!
