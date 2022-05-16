@@ -8,8 +8,8 @@ Each version of the game had its own password system that had to be studied and 
 For example, the Japanese version of Ecco the Dolphin is not compatible with the US version due to tweaks in the 
 password algorithm. 
 
-As a little bit of extra spice, the ripple effect used on the password screen animation is also an algorithm
-ported from the original games. 
+As a little bit of extra spice, the password screen animation used in the generator incorporates a ripple effect that is also an algorithm
+ported from the original games!
 
 # Features
 
