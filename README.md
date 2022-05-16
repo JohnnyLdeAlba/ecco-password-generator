@@ -3,7 +3,7 @@ A password generator for the Sega Genesis and Sega CD versions of Ecco the Dolph
 
 # How Was This Made?
 
-This password generator was built by disaaembling the games code and porting it from 68000 assembly to Javascript.
+This password generator was built by disassembling the games code and porting it from 68000 assembly to Javascript.
 Each version of the game had its own password system that had to be studied and incorporated into the generator.
 For example, the Japanese version of Ecco the Dolphin is not compatible with the US version due to tweaks in the 
 password algorithm. 
