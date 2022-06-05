@@ -1,7 +1,7 @@
 # Ecco the Dolphin Password Generator
 A password generator for the Sega Genesis and Sega CD versions of Ecco the Dolphin.
 
-<img style="height: 400px;" src="https://raw.githubusercontent.com/JohnnyLdeAlba/ecco-password-generator/master/ecco-password-website.png" />
+<img style="height: 400px;" src="https://raw.githubusercontent.com/JohnnyLdeAlba/ecco-password-generator/master/ecco-password-ui.png" />
 
 # How Was This Made?
 
